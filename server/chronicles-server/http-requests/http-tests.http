@@ -1,0 +1,466 @@
+@url = http://localhost:8080
+
+###
+
+POST {{url}}/refresh_token HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODAwODM3MH0.LjuHDUVuVaLYrDpP2an6ISYeJV34nF1dwc2hyAg9X-0
+
+###
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "HazMat",
+    "password": "P@ssw0rd!"
+}
+
+### 
+
+POST {{url}}/create_account HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "matt",
+  "password": "Matt!!78",
+  "email": "matt2@gmail.com"
+}
+
+###
+
+POST {{url}}/authenticate HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "matt",
+    "password": "Matt!!78"
+}
+
+###
+
+PUT {{url}}/api/user/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6IiMxMDUwMWQiLCJhdmF0YXIiOiJodHRwczovL2kucGluaW1nLmNvbS9vcmlnaW5hbHMvNGQvODYvNWUvNGQ4NjVlYTQ3YTg2NzVkNjgyZmYzNWFkOTA0YTBhZjYucG5nIiwiZXhwIjoxNjk5MTA1MjQ3fQ.thQHIDesPViyhUBYaqgNJruDjJ1VoX9xtB9nf8NaVH4
+
+{
+  "appUserId": 1,
+  "username": "HazMat",
+  "email": "mattupdate@gmail.com",
+  "password": "P@ssw0rd!",
+  "enabled": "true",
+  "color": "green",
+  "avatar": "https://i.pinimg.com/originals/4d/86/5e/4d865ea47a8675d682ff35ad904a0af6.png",
+  "roles": ["ADMIN"]
+}
+
+###
+
+GET {{url}}/api/user/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODMzODUzMH0.CxhYJSB9fp7F4MXZywv7HrT2TYeRyYOQBEiLW-6oAlU
+
+//-------------------------------board games------------------------//
+###
+
+GET {{url}}/api/board-game HTTP/1.1
+Authorization: Bearer 
+
+###
+
+GET {{url}}/api/board-game/box/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIhUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODAyMDg2Nn0.GBmdjpqbeRzxcDJ2ycqCHyYl79tnDyIZhreQiy7d9hE
+
+###
+
+GET {{url}}/api/board-game/1 HTTP/1.1
+
+###
+POST {{url}}/api/board-game HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "test",
+    "height": 800,
+    "boardSlots": 1,
+    "placesPerBoard": 64
+
+}
+
+###
+
+###
+PUT {{url}}/api/board-game/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+    "name": "test",
+    "height": 800,
+    "boardSlots": 5,
+    "placesPerBoard": 64
+
+}
+
+###
+
+PUT {{url}}/api/board-game/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+    "name": "test",
+    "height": 800,
+    "boardSlots": 4,
+    "placesPerBoard": 64
+
+}
+
+###
+
+DELETE  {{url}}/api/board-game/3 HTTP/1.1
+
+//-------------------------------boards------------------------//
+
+###
+GET {{url}}/api/board/board-game/2 HTTP/1.1
+
+###
+
+GET {{url}}/api/board/1 HTTP/1.1
+
+###
+POST {{url}}/api/board HTTP/1.1
+Content-Type: application/json
+
+{
+    "boardGameId": 2,
+    "category": "boards",
+    "name": "sector3",
+    "skin": ""
+
+}
+
+###
+
+###
+PUT {{url}}/api/board/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 4,
+    "boardGameId": 2,
+    "category": "boards",
+    "name": "oops",
+    "skin": ""
+
+}
+
+###
+
+PUT {{url}}/api/board/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 5,
+    "boardGameId": 99,
+    "category": "test",
+    "name": "oops",
+    "skin": ""
+
+}
+
+###
+
+DELETE  {{url}}/api/board/4 HTTP/1.1
+
+//-------------------------------cards------------------------//
+
+###
+GET {{url}}/api/card/board-game/2 HTTP/1.1
+
+###
+
+GET {{url}}/api/card/1 HTTP/1.1
+
+###
+POST {{url}}/api/card HTTP/1.1
+Content-Type: application/json
+
+{
+    "category": "cards",
+  "name": "Punisher Short Sword",
+  "type": "Equipment",
+  "cardFront": "",
+  "cardBack": "",
+  "show": false,
+  "text": "Simple Sword",
+  "inHand": 0,
+  "variables": null,
+  "boardGameId": 2
+
+}
+
+###
+
+###
+PUT {{url}}/api/card/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+      "category": "cards",
+  "name": "Punisher Short Sword",
+  "type": "Equipment",
+  "cardFront": "",
+  "cardBack": "",
+  "show": false,
+  "text": "Simple Sword",
+  "inHand": 0,
+  "variables": "damage, 10",
+  "boardGameId": 2
+
+}
+
+###
+
+PUT {{url}}/api/card/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+      "category": "cards",
+  "name": "Punisher Short Sword",
+  "type": "",
+  "cardFront": "",
+  "cardBack": "",
+  "show": false,
+  "text": "Simple Sword",
+  "inHand": 0,
+  "variables": "damage, 10",
+  "boardGameId": 2
+
+}
+
+###
+
+DELETE  {{url}}/api/card/3 HTTP/1.1
+
+//-------------------------------dice------------------------//
+
+###
+GET {{url}}/api/die/board-game/2 HTTP/1.1
+
+###
+
+GET {{url}}/api/die/1 HTTP/1.1
+
+###
+POST {{url}}/api/die HTTP/1.1
+Content-Type: application/json
+
+{
+    "category": "die",
+  "name": "Regular Die",
+  "color": "black",
+  "background": "white",
+  "side1": "1",
+  "side2": "2",
+  "side3": "3",
+  "side4": "4",
+  "side5": "5",
+  "side6": "6",
+  "rolling": false,
+  "winningSide": null,
+  "boardGameId": 2
+
+}
+
+###
+
+###
+PUT {{url}}/api/die/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 4,
+ "category": "die",
+  "name": "Regular Die",
+  "color": "black",
+  "background": "blue",
+  "side1": "1",
+  "side2": "2",
+  "side3": "3",
+  "side4": "4",
+  "side5": "5",
+  "side6": "6",
+  "rolling": false,
+  "winningSide": null,
+  "boardGameId": 2
+
+}
+
+###
+
+PUT {{url}}/api/die/4 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 4,
+ "category": "die",
+  "name": "Regular Die",
+  "color": "black",
+  "background": "blue",
+  "side1": "1",
+  "side2": "2",
+  "side3": "3",
+  "side4": "4",
+  "side5": "5",
+  "side6": "6",
+  "rolling": false,
+  "winningSide": null,
+  "boardGameId": 5
+
+}
+
+###
+
+DELETE  {{url}}/api/die/4 HTTP/1.1
+
+//-------------------------------figures------------------------//
+
+###
+GET {{url}}/api/figure/board-game/2 HTTP/1.1
+
+###
+
+GET {{url}}/api/figure/1 HTTP/1.1
+
+###
+POST {{url}}/api/figure HTTP/1.1
+Content-Type: application/json
+
+{
+  "category": "figures",
+  "name": "e",
+  "skin": "",
+  "color": "brown",
+  "boardGameId": 1
+
+}
+
+###
+
+###
+PUT {{url}}/api/figure/5 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 5,
+  "category": "figures",
+  "name": "e",
+  "skin": "",
+  "color": "brown",
+  "boardGameId": 0
+
+}
+
+
+###
+
+DELETE  {{url}}/api/figure/5 HTTP/1.1
+
+
+//-----------------------------GameInstance-------------------//
+
+###
+GET {{url}}/api/game-instance/board-game/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODI1MjYzN30.RKqyMnmZK3a24lSiWgl4OzIvdEf2akJ1Y0ETAXZ3F5I
+
+###
+
+GET {{url}}/api/game-instance/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODI1NDA0Nn0._M1dKqFemt4g3NXjlc0i5NAkTz__uHcF3atSI5nqxB8
+###
+
+
+GET {{url}}/api/game-instance/users-title/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODI1MjYzN30.RKqyMnmZK3a24lSiWgl4OzIvdEf2akJ1Y0ETAXZ3F5I
+
+###
+
+GET {{url}}/api/game-instance/user/1 HTTP/1.1
+
+###
+
+POST {{url}}/api/game-instance HTTP/1.1
+Content-Type: application/json
+
+{
+  "saveState": null,
+  "log": null,
+  "boardGameId": 2
+
+}
+
+###
+
+PUT {{url}}/api/game-instance/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODI1MTgyNn0.AXLSZK75Y62hk3Q0fejLTNELSqgHjHVVMcN_blvGE10
+
+{
+  "id": 2,
+  "saveState": "a lot of info goes here",
+  "log": null,
+  "boardGameId": 2
+
+}
+
+###
+
+PUT {{url}}/api/game-instance/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 3,
+  "saveState": "a lot of info goes here",
+  "log": null,
+  "boardGameId": -9
+
+}
+
+###
+
+POST  {{url}}/api/game-instance/user HTTP/1.1
+Content-Type: application/json
+
+{
+  "gameInstanceId": 3,
+  "appUserId": 1
+
+}
+
+###
+
+POST  {{url}}/api/game-instance/user HTTP/1.1
+Content-Type: application/json
+
+{
+  "gameInstanceId": 3,
+  "appUserId": 2
+
+}
+
+###
+
+GET {{url}}/api/game-instance/user/3 HTTP/1.1
+
+###
+
+DELETE  {{url}}/api/game-instance/3 HTTP/1.1
+
+###
+
+GET {{url}}/api/user/username/Dan-the-man HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZi1hcGkiLCJzdWIiOiJIYXpNYXQiLCJhdXRob3JpdGllcyI6IkFETUlOIiwiYXBwX3VzZXJfaWQiOjEsImVtYWlsIjoibWF0dEBnbWFpbC5jb20iLCJjb2xvciI6ImdyZWVuIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLnBpbmltZy5jb20vb3JpZ2luYWxzLzRkLzg2LzVlLzRkODY1ZWE0N2E4Njc1ZDY4MmZmMzVhZDkwNGEwYWY2LnBuZyIsImV4cCI6MTY5ODI2NTAwOX0.FCJthWqg_6rvVLeFFIJpM9DQdRxzIYROkKfxTMWFAKU
+ 
