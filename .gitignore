@@ -34,3 +34,6 @@ target/
 
 # Node
 node_modules/
+
+# server properties
+.properties
