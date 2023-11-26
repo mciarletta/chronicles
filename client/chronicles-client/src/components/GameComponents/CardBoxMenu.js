@@ -4,7 +4,7 @@ import { Button, ListGroup, DropdownButton } from "react-bootstrap";
 import PlayersContext from "../contexts/PlayersContext";
 import BoardsContext from "../contexts/BoardsContext";
 
-export default function CardBoxMenu({ putCardInHand }) {
+export default function CardBoxMenu({ putCardInHand, showCard }) {
   //grab our box contenxt and players
   const box = useContext(BoxContext);
   const players = useContext(PlayersContext);
@@ -49,6 +49,16 @@ export default function CardBoxMenu({ putCardInHand }) {
             <ListGroup>
               <ListGroup.Item>
                 {ct}
+                {/* Buttons for viewing and placing a random card */}
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => sendRandomCard(-999, ct)}
+                  className="ms-2"
+                >
+                  Shared Space
+                </Button>
+
                 {players.map((p) => {
                   return (
                     <Button
@@ -61,13 +71,7 @@ export default function CardBoxMenu({ putCardInHand }) {
                     </Button>
                   );
                 })}
-                <Button
-                  size="sm"
-                  variant="dark"
-                  onClick={() => sendRandomCard(-999, ct)}
-                >
-                  Shared Space
-                </Button>
+                
 
                 {boards.map((b) => {
                   return (
@@ -94,6 +98,23 @@ export default function CardBoxMenu({ putCardInHand }) {
                         card.type === ct && (
                           <ListGroup.Item key={card.boxId}>
                             {card.name}
+                            <Button
+                              size="sm"
+                              variant="info"
+                              onClick={() => showCard(card, true)}
+                              className="ms-2"
+                            >
+                              View
+                            </Button>
+
+                            <Button
+                              onClick={() => putCardInHand(card, -999)}
+                              size="sm"
+                              variant="secondary"
+                            >
+                              Shared Space
+                            </Button>
+                            
                             {players.map((p) => {
                               return (
                                 <Button
@@ -106,13 +127,7 @@ export default function CardBoxMenu({ putCardInHand }) {
                                 </Button>
                               );
                             })}
-                            <Button
-                              onClick={() => putCardInHand(card, -999)}
-                              size="sm"
-                              variant="dark"
-                            >
-                              Shared Space
-                            </Button>
+                            
 
                             {boards.map((b) => {
                               return (

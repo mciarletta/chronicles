@@ -13,7 +13,7 @@ import GameDash from "./components/GameDash";
 import ResetFunContext from "./components/contexts/ResetFuncContext";
 
 //set a timeout to refresh tokens
-const TIMEOUT_MILLISECONDS = 14 * 60 * 1000;
+const TIMEOUT_MILLISECONDS = 2 * 60 * 1000;
 
 // Define a variable for the localStorage token item key
 const LOCAL_STORAGE_TOKEN_KEY = "chronicles-token";

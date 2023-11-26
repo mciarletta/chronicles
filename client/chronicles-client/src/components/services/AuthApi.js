@@ -1,7 +1,8 @@
 import jwtDecode from "jwt-decode";
 
 const LOCAL_STORAGE_TOKEN_KEY = "chronicles-token";
-const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://18.219.25.60:8080";
 
 
 export async function login(Credentials) {

@@ -152,7 +152,7 @@ export default function ViewCard({
         </Row>}
         
 
-        {(auth.user.app_user_id === card.inHand || card.inHand < 0) && (
+        {(auth.user.app_user_id === card.inHand || card.inHand < 0) && (card.inHand !== -1999) && (
           <Row className="d-flex align-content-start flex-wrap">
             {card.show ? (
               <Col>
@@ -235,7 +235,7 @@ export default function ViewCard({
               })}
 
               {(auth.user.app_user_id === card.inHand ||
-                card.inHand < 0) && (
+                card.inHand < 0) && (card.inHand !== -1999) && (
                 <Button
                   className="my-2"
                   type="submit"

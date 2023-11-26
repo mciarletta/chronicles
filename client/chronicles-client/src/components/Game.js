@@ -164,7 +164,8 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
   //--------------------------------WebSocket Connections----------------------------//
   const connect = () => {
     //The End point is specified in the server. Using the default ws end point.
-    let Sock = new SockJS("http://localhost:8080/ws");
+    let Sock = new SockJS("http://18.219.25.60:8080/ws");
+    // let Sock = new SockJS("http://localhost:8080/ws");
 
     stompClient = over(Sock);
 
@@ -272,6 +273,11 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
   const handleBoxUpdate = (payload) => {
     // Parse the payload body as JSON
     const payloadData = JSON.parse(payload.body);
+
+    //sort the box
+    payloadData.sort((a, b) => a.boxId - b.boxId);
+
+    console.log(payloadData);
 
     //update the boards
     setBox(payloadData);
@@ -443,6 +449,7 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
       skin: board.skin,
       category: board.category,
       rotate: 0,
+      boardGameId: board.boardGameId,
     };
 
     // add the board
@@ -758,6 +765,7 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
       category: piece.category,
       color: piece.color,
       scale: piece.scale,
+      boardGameId: piece.boardGameId,
     };
 
     //add the piece
@@ -825,7 +833,7 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
       }
 
       //get rid of the cards on the board back to the box
-      const cardsOnBoard = cards.filter((c) => c.inHand === -(board.boxId + 1));
+      const cardsOnBoard = cards.find((c) => c.inHand === -(board.boxId + 1));
       if (cardsOnBoard){
         //leave a nice message
         setShowError({
@@ -845,6 +853,7 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
         category: board.category,
         name: board.name,
         skin: board.skin,
+        boardGameId: board.boardGameId,
       };
     } else {
       //we only need certain attributes from the piece, get them now from the piecesAtClick
@@ -854,6 +863,10 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
         category: piecesAtClick[0].category,
         name: piecesAtClick[0].name,
         skin: piecesAtClick[0].skin,
+        color: piecesAtClick[0].color,
+        scale: piecesAtClick[0].scale,
+        boardGameId: piecesAtClick[0].boardGameId,
+
       };
     }
 
@@ -932,8 +945,11 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
 
   const returnDie = (dieToReturn) => {
     //add to the box
+    dieToReturn.rolling = false;
     const updatedBox = [...box, dieToReturn];
     setBox(updatedBox);
+    sendBox(updatedBox);
+
 
     //remove that die from the die list
     const updatedDie = die.filter((obj) => obj.boxId !== dieToReturn.boxId);
@@ -945,6 +961,11 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
 
   const returnAllDie = () => {
     //add to the box
+    if (die){
+      for (let d of die){
+        d.rolling = false;
+      }
+    }
     const updatedBox = [...box, ...die];
     setBox(updatedBox);
     sendBox(updatedBox);
@@ -1077,13 +1098,18 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
     setViewCard(false);
   };
 
-  const showCard = (card) => {
+  const showCard = (card, view = false) => {
     //only see cards that you are allowed to see, this means it must match the current player's id
     if (
       auth.user.app_user_id === card.inHand ||
       card.show === true ||
-      card.inHand < 0
+      card.inHand < 0 ||
+      view
     ) {
+      if (view){
+        card.inHand = -1999;
+        card.show = true;
+      }
       setViewCard(true);
       setCardToView(card);
     }
@@ -1334,6 +1360,7 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
                       putCardInHand={putCardInHand}
                       returnCardToBox={returnCardToBox}
                       returnAllDiscard={returnAllDiscard}
+                      showCard={showCard}
                     ></BoxMenu>
                     </BoardsContext.Provider>
                   </DiscardContext.Provider>
@@ -1405,7 +1432,6 @@ export default function Game({ boxFromDb, boardGameInfo, gameInstance }) {
               </Col>
 
               {boards.map((b, index) => {
-                console.log("test");
                 return (
                   <Col key={b.name + index} sm={6} md={4} xs={12} className="my-2">
                     <SharedHand cards={cards} showCard={showCard} name={b.name} itemId={-(b.boxId + 1)}></SharedHand>

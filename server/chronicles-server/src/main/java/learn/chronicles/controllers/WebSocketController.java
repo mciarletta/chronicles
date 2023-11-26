@@ -3,6 +3,7 @@ package learn.chronicles.controllers;
 import learn.chronicles.App;
 import learn.chronicles.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,6 +18,8 @@ import java.util.*;
 
 
 @Controller
+@ConditionalOnWebApplication
+
 public class WebSocketController {
 
     @Autowired
